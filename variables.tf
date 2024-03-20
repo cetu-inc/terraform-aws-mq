@@ -66,13 +66,13 @@ variable "publicly_accessible" {
 variable "general_log_enabled" {
   type        = bool
   description = "Enables general logging via CloudWatch"
-  default     = true
+  default     = false
 }
 
 variable "audit_log_enabled" {
   type        = bool
   description = "Enables audit logging. User management action made using JMX or the ActiveMQ Web Console is logged"
-  default     = true
+  default     = false
 }
 
 variable "maintenance_day_of_week" {
