@@ -48,7 +48,6 @@ resource "aws_mq_broker" "main" {
   dynamic "logs" {
     for_each = {
       for logs, type in local.mq_logs : logs => type
-      if type.general_log_enabled || type.audit_log_enabled
     }
     content {
       general = logs.value["general_log_enabled"]

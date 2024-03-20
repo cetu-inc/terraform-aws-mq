@@ -1,4 +1,24 @@
-<!-- BEGIN_TF_DOCS -->
+# terraform-aws-mq
+Terraform module for provisioning an Amazon MQ broker
+
+## Usage
+
+```hcl
+module "mq" {
+  source  = "dare-global/mq/aws"
+  version = "1.X.X"
+
+  broker_name = "mq-broker"
+  subnet_ids = ["subnet-id-12345"]
+}
+```
+
+## Examples
+
+* [ActiveMQ](https://github.com/dare-global/terraform-aws-mq/tree/main/examples/activemq)
+* [RabbitMQ](https://github.com/dare-global/terraform-aws-mq/tree/main/examples/rabbitmq)
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -51,7 +71,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | Specifies whether any cluster modifications are applied immediately, or during the next maintenance window | `bool` | `false` | no |
-| <a name="input_audit_log_enabled"></a> [audit\_log\_enabled](#input\_audit\_log\_enabled) | Enables audit logging. User management action made using JMX or the ActiveMQ Web Console is logged | `bool` | `false` | no |
+| <a name="input_audit_log_enabled"></a> [audit\_log\_enabled](#input\_audit\_log\_enabled) | Enables audit logging. User management action made using JMX or the ActiveMQ Web Console is logged | `bool` | `true` | no |
 | <a name="input_authentication_strategy"></a> [authentication\_strategy](#input\_authentication\_strategy) | Authentication strategy used to secure the broker. Valid values are simple and ldap. ldap is not supported for engine\_type RabbitMQ. | `string` | `null` | no |
 | <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions | `bool` | `false` | no |
 | <a name="input_broker_name"></a> [broker\_name](#input\_broker\_name) | Name of the broker | `string` | n/a | yes |
@@ -72,7 +92,7 @@ No modules.
 | <a name="input_encryption_enabled"></a> [encryption\_enabled](#input\_encryption\_enabled) | Flag to enable/disable Amazon MQ encryption at rest | `bool` | `true` | no |
 | <a name="input_engine_type"></a> [engine\_type](#input\_engine\_type) | Type of broker engine, `ActiveMQ` or `RabbitMQ` | `string` | `"ActiveMQ"` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of the broker engine. See https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html for more details | `string` | `"5.17.1"` | no |
-| <a name="input_general_log_enabled"></a> [general\_log\_enabled](#input\_general\_log\_enabled) | Enables general logging via CloudWatch | `bool` | `false` | no |
+| <a name="input_general_log_enabled"></a> [general\_log\_enabled](#input\_general\_log\_enabled) | Enables general logging via CloudWatch | `bool` | `true` | no |
 | <a name="input_host_instance_type"></a> [host\_instance\_type](#input\_host\_instance\_type) | The broker's instance type. e.g. mq.t2.micro or mq.m4.large | `string` | `"mq.t3.micro"` | no |
 | <a name="input_kms_mq_key_arn"></a> [kms\_mq\_key\_arn](#input\_kms\_mq\_key\_arn) | ARN of the AWS KMS key used for Amazon MQ encryption | `string` | `null` | no |
 | <a name="input_maintenance_day_of_week"></a> [maintenance\_day\_of\_week](#input\_maintenance\_day\_of\_week) | The maintenance day of the week. e.g. MONDAY, TUESDAY, or WEDNESDAY | `string` | `"SUNDAY"` | no |
@@ -116,4 +136,29 @@ No modules.
 | <a name="output_broker_instances"></a> [broker\_instances](#output\_broker\_instances) | AmazonMQ broker instances details. |
 | <a name="output_nlb_dns_name"></a> [nlb\_dns\_name](#output\_nlb\_dns\_name) | NLB DNS Name. |
 | <a name="output_nlb_zone_id"></a> [nlb\_zone\_id](#output\_nlb\_zone\_id) | NLB Zone Id. |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## License
+
+See LICENSE file for full details.
+
+## Maintainers
+
+* [Marcin Cuber](https://github.com/marcincuber)
+
+## Pre-commit hooks
+
+### Install dependencies
+
+* [`pre-commit`](https://pre-commit.com/#install)
+* [`terraform-docs`](https://github.com/segmentio/terraform-docs) required for `terraform_docs` hooks.
+* [`TFLint`](https://github.com/terraform-linters/tflint) required for `terraform_tflint` hook.
+
+#### MacOS
+
+```bash
+brew install pre-commit terraform-docs tflint
+
+brew tap git-chglog/git-chglog
+brew install git-chglog
+```
